@@ -3,7 +3,7 @@ const Rol = require('../models/rol');
 
 const validarRol = async(rol='')=>{
     //Buscar rol por nombre
-    const existeRol = await Rol.findOne({rol});
+    const existeRol = await Rol.findOne({rol: rol.toUpperCase()});
 
     if(!existeRol){
         //Enviar un error personalizado
