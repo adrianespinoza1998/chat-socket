@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 
 const usuarioRoutes = require('../routes/usuarioRoutes');
+const mensajeRoutes = require('../routes/mensajeRoutes');
+const rolRoutes = require('../routes/rolRoutes');
+const salaRoutes = require('../routes/salaRoutes');
+const tipoRoutes = require('../routes/tipoRoutes');
 
 const {dbConnection} = require('../database/config');
 
@@ -17,7 +21,10 @@ class Server {
         //Rutas de la api
         this.path = {
             usuarios : '/api/usuarios',
-            mensajes : '/api/mensajes'
+            mensajes : '/api/mensajes',
+            salas: '/api/salas',
+            tipos: '/api/tipos',
+            roles: '/api/roles'
         }
 
         //Conectar la base de datos
@@ -43,6 +50,10 @@ class Server {
 
     routes() {
         this.app.use(this.path.usuarios, usuarioRoutes);
+        this.app.use(this.path.mensajes, mensajeRoutes);
+        this.app.use(this.path.roles, rolRoutes);
+        this.app.use(this.path.salas, salaRoutes);
+        this.app.use(this.path.tipos, tipoRoutes);
     }
 
     listen() {

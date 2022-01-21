@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const { required } = require('nodemon/lib/config');
 
 const mensajeSchema = Schema({
     msg: {
@@ -22,6 +23,17 @@ const mensajeSchema = Schema({
         type: Boolean,
         required: [true],
         default: true
+    },
+    emisor: [
+        {type: Schema.Types.ObjectId, ref: 'Usuario'},
+    ],
+    receptor: [
+        {type: Schema.Types.ObjectId, ref: 'Usuario'},
+    ],
+    editado: {
+        type: Boolean,
+        required: [true],
+        default: false
     }
 });
 
