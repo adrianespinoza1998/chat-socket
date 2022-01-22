@@ -59,19 +59,9 @@ const existeTipo = async(id)=>{
     }
 }
 
-/*const existeMensaje = async(id)=>{
-    //Buscar mensaje x id
-    const mensaje = await Mensaje.findById(id);
-
-    if(!mensaje){
-        throw new Error(`El mensaje con el id ${mensaje} no existe`);
-    }    
-}*/
-
 const validarNombreTipo = async(nombre)=>{
-
     //Buscar nombre tipo que
-    const tipo = await Tipo.findOne({nombre: nombre.toUpperCase()});
+    const tipo = await Tipo.findOne({nombre: nombre.toUpperCase(), estado: true});
 
     if(tipo){
         throw new Error(`El tipo con el nombre ${nombre} ya existe`);

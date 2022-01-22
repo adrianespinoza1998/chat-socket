@@ -6,9 +6,7 @@ const listarSala = async(req = request, res = response)=>{
     //Buscar salas activas
     const salas = await Sala.find({estado: true});
 
-    res.status(200).json({
-        salas
-    });
+    res.status(200).json(salas);
 }
 
 const buscarSalaXId = async(req = request, res = response) => {
@@ -19,9 +17,17 @@ const buscarSalaXId = async(req = request, res = response) => {
     //Buscar sala x id
     const sala = await Sala.findById(id);
 
-    res.status(200).json({
-        sala
-    });
+    res.status(200).json(sala);
+}
+
+const buscarSalaXTipo = async(req = request, res = response) => {
+    //Guardar id del tipo
+    const {id} = req.params;
+
+    //Buscar salas x id del tipo
+    const salas = await Sala.find({tipo: id});
+
+    res.status(200).json(salas);
 }
 
 const crearSala = async(req = request, res = response)=>{
@@ -30,14 +36,12 @@ const crearSala = async(req = request, res = response)=>{
     const {nombre, tipo} = req.body;
 
     //Crear sala
-    const sala = new Sala({nombre, tipo});
+    const sala = new Sala({nombre: nombre.toUpperCase(), tipo});
 
     //Guardar sala
     await sala.save();
 
-    res.status(200).json({
-        sala
-    });
+    res.status(200).json(sala);
 }
 
 const editarSala = async(req = request, res = response)=>{
@@ -49,11 +53,9 @@ const editarSala = async(req = request, res = response)=>{
     const {nombre, tipo} = req.body;
 
     //Buscar y actualizar sala
-    const sala = await Sala.findByIdAndUpdate(id, {nombre, tipo}, {new: true});
+    const sala = await Sala.findByIdAndUpdate(id, {nombre: nombre.toUpperCase(), tipo}, {new: true});
 
-    res.status(201).json({
-        sala
-    });
+    res.status(201).json(sala);
 }
 
 const desactivarSala = async(req = request, res = response)=>{
@@ -64,9 +66,7 @@ const desactivarSala = async(req = request, res = response)=>{
     //Desactivar sala
     const sala = await Sala.findByIdAndUpdate(id, {estado: false}, {new: true});
 
-    res.status(201).json({
-        sala
-    });
+    res.status(201).json(sala);
 }
 
 module.exports = {
@@ -74,5 +74,6 @@ module.exports = {
     buscarSalaXId,
     crearSala,
     editarSala,
-    desactivarSala
+    desactivarSala,
+    buscarSalaXTipo
 }

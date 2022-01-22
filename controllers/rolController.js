@@ -4,9 +4,7 @@ const listarRoles = async(req = request, res = response)=>{
     //Listar Roles
     const roles = await Rol.find({estado: true});
 
-    res.status(200).json({
-        roles
-    });
+    res.status(200).json(roles);
 
 }
 
@@ -17,9 +15,7 @@ const buscarRolXId = async(req = request, res = response)=>{
     //Buscar rol x id
     const rol = await Rol.findById(id);
 
-    res.status(200).json({
-        rol
-    });
+    res.status(200).json(rol);
 }
 
 const crearRol = async(req = request, res = response)=>{
@@ -40,9 +36,7 @@ const crearRol = async(req = request, res = response)=>{
     //Guardar rol
     await role.save();
 
-    res.status(201).json({
-        role
-    });
+    res.status(201).json(role);
 
 }
 
@@ -56,9 +50,7 @@ const editarRol = async(req = request, res = response)=>{
     //Editar rol
     const role = await Rol.findByIdAndUpdate(id, {rol: rol.toUpperCase()}, {new: true});
 
-    res.status(201).json({
-        role
-    });
+    res.status(201).json(role);
 }
 
 const desactivarRol = async(req = request, res = response)=>{
