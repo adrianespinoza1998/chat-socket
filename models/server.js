@@ -6,6 +6,7 @@ const mensajeRoutes = require('../routes/mensajeRoutes');
 const rolRoutes = require('../routes/rolRoutes');
 const salaRoutes = require('../routes/salaRoutes');
 const tipoRoutes = require('../routes/tipoRoutes');
+const authRoutes = require('../routes/authRoutes');
 
 const {dbConnection} = require('../database/config');
 
@@ -24,7 +25,8 @@ class Server {
             mensajes : '/api/mensajes',
             salas: '/api/salas',
             tipos: '/api/tipos',
-            roles: '/api/roles'
+            roles: '/api/roles',
+            auth: '/api/auth',
         }
 
         //Conectar la base de datos
@@ -54,6 +56,7 @@ class Server {
         this.app.use(this.path.roles, rolRoutes);
         this.app.use(this.path.salas, salaRoutes);
         this.app.use(this.path.tipos, tipoRoutes);
+        this.app.use(this.path.auth, authRoutes);
     }
 
     listen() {
