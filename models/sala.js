@@ -8,6 +8,9 @@ const salaSchema = Schema({
     tipo: [
         {type: Schema.Types.ObjectId, ref: 'Tipo'}
     ],
+    usuario: [
+        {type: Schema.Types.ObjectId, ref: 'Usuario'}
+    ],
     estado: {
         type: Boolean,
         required: [true],

@@ -33,10 +33,10 @@ const buscarSalaXTipo = async(req = request, res = response) => {
 const crearSala = async(req = request, res = response)=>{
 
     //Guardar datos de la sala
-    const {nombre, tipo} = req.body;
+    const {nombre, tipo, usuario} = req.body;
 
     //Crear sala
-    const sala = new Sala({nombre: nombre.toUpperCase(), tipo});
+    const sala = new Sala({nombre: nombre.toUpperCase(), tipo, usuario});
 
     //Guardar sala
     await sala.save();
@@ -50,10 +50,10 @@ const editarSala = async(req = request, res = response)=>{
     const {id} = req.params;
 
     //Guardar datos de la sala
-    const {nombre, tipo} = req.body;
+    const {nombre, tipo, usuario} = req.body;
 
     //Buscar y actualizar sala
-    const sala = await Sala.findByIdAndUpdate(id, {nombre: nombre.toUpperCase(), tipo}, {new: true});
+    const sala = await Sala.findByIdAndUpdate(id, {nombre: nombre.toUpperCase(), tipo, usuario}, {new: true});
 
     res.status(201).json(sala);
 }
